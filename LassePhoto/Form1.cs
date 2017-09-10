@@ -13,21 +13,45 @@ namespace LassePhoto
 {
     public partial class Form1 : Form
     {
+
+        Bitmap SelectedImage;
+        Graphics Graphics;
+        Color SelectedColor;
+        int TextSize;
+
+        //int imageWidth;
+        //int imageHeight;
+
+        //int pictureBoxWidth;
+        //int pictureBoxHeight;
+
+
+
+        //int textboxHeight;
+        //int textboxWidth;
+        //int textboxX;
+        //int textboxY;
+
         public Form1()
         {
             InitializeComponent();
 
 
             this.TextSize = 20;
+            //this.textboxX = 0;
+            //this.textboxY = 100;
+            //this.textboxHeight = 500;
+            //this.textboxWidth = 500;
             numericUpDown1.Value = 20;
+
+            SelectedColor = Color.Black;
+            btnSelectColor.BackColor = SelectedColor;
+
+
+
         }
 
 
-        Bitmap SelectedImage;
-        Graphics Graphics;
-        Color SelectedColor;
-        int TextSize;
-        
 
 
         //private bool IsSelecting = false;
@@ -51,6 +75,17 @@ namespace LassePhoto
                     //imgView.Image = (Bitmap)SelectedImage.Clone();
                     imgView.Image = (Bitmap)SelectedImage;
 
+
+                    // var point = TranslateZoomMousePosition(new Point(0, 100));
+                    //this.textboxX = 0;
+                    //this.textboxY = 100;
+
+
+                    //this.imageWidth = imgView.Image.Width;
+                    //this.imageHeight = imgView.Image.Height;
+
+                    //this.pictureBoxWidth = imgView.Width;
+                    //this.pictureBoxHeight = imgView.Height;
                 }
                 catch (Exception ex)
                 {
@@ -64,38 +99,42 @@ namespace LassePhoto
 
         private void txtImageText_TextChanged(object sender, EventArgs e)
         {
-
             imgView.Refresh();
-            //imgView.Image = null;
-
-
-            //imgView.Image = (Bitmap)SelectedImage.Clone();
-            //Graphics = System.Drawing.Graphics.FromImage(imgView.Image);
-
-            //Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-
-            //var brush = new SolidBrush(Color.FromArgb(255, (byte)this.SelectedColor.R, (byte)this.SelectedColor.G, (byte)this.SelectedColor.B));
-            //Graphics.DrawString(txtImageText.Text, new Font("Tahoma", this.TextSize), brush, new PointF(0, 0));
-
-
-
-            //imgView.Refresh();
-
         }
 
         private void btnSaveImage_Click(object sender, EventArgs e)
         {
+            saveFileDialog.Filter = "Jpg Image|*.jpg";
+
             DialogResult result = saveFileDialog.ShowDialog();
             if (result == DialogResult.OK) // Test result.
             {
                 string file = saveFileDialog.FileName;
                 try
                 {
-                    imgView.Image.Save(saveFileDialog.FileName);
 
 
-                    //Jonas
+                    RectangleF header2Rect = new RectangleF();
+                    Graphics = System.Drawing.Graphics.FromImage(imgView.Image);
 
+                    using (Font useFont = new Font("Gotham Medium", Convert.ToInt32(numericUpDown1.Value), FontStyle.Bold))
+                    {
+                        var height = ((int)Graphics.MeasureString(txtImageText.Text, useFont, imgView.Image.Width, StringFormat.GenericTypographic).Height);
+                        header2Rect.Location = new Point(0, imgView.Image.Height - height);
+                        header2Rect.Size = new Size(imgView.Image.Width, ((int)Graphics.MeasureString(txtImageText.Text, useFont, imgView.Image.Width, StringFormat.GenericTypographic).Height));
+                        var brush = new SolidBrush(Color.FromArgb(255, (byte)this.SelectedColor.R, (byte)this.SelectedColor.G, (byte)this.SelectedColor.B));
+
+                        Graphics.DrawString(txtImageText.Text, useFont, brush, header2Rect);
+                    }
+
+
+                    Bitmap bm = new Bitmap(imgView.Image);
+                    bm.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                    imgView.Image = null;
+                    Graphics = null;
+                    txtImageText.Text = "";
+                    imgView.Refresh();
 
                 }
                 catch (Exception ex)
@@ -105,58 +144,23 @@ namespace LassePhoto
 
         }
 
-        private void btnShow_Click(object sender, EventArgs e)
-        {
-            imgView.Image = (Bitmap)SelectedImage.Clone();
-            Graphics = System.Drawing.Graphics.FromImage(imgView.Image);
-
-            Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-
-            var brush = new SolidBrush(Color.FromArgb(255, (byte)this.SelectedColor.R, (byte)this.SelectedColor.G, (byte)this.SelectedColor.B));
-            Graphics.DrawString(txtImageText.Text, new Font("Tahoma", this.TextSize), brush, new PointF(0, 0));
-
-
-            //RectangleF header2Rect = new RectangleF();
-            //using (Font useFont = new Font("Gotham Medium", 28, FontStyle.Bold))
-            //{
-            //    header2Rect.Location = new Point(30, 105);
-            //    header2Rect.Size = new Size(600, ((int)e.Graphics.MeasureString(header2, useFont, 600, StringFormat.GenericTypographic).Height));
-            //    e.Graphics.DrawString(header2, useFont, Brushes.Black, header2Rect);
-            //}
-
-
-
-        }
-
         private void imgView_Paint_1(object sender, PaintEventArgs e)
         {
-            //string header2 = "This is a much, much longer Header";
-            //string description = "This is a description of the header.";
 
-            RectangleF header2Rect = new RectangleF();
-            using (Font useFont = new Font("Gotham Medium", 28, FontStyle.Bold))
+            if (imgView.Image == null)
             {
-                header2Rect.Location = new Point(30, 105);
-                header2Rect.Size = new Size(600, ((int)e.Graphics.MeasureString(txtImageText.Text, useFont, 600, StringFormat.GenericTypographic).Height));
-                e.Graphics.DrawString(txtImageText.Text, useFont, Brushes.Black, header2Rect);
+                return;
+            }
+            RectangleF header2Rect = new RectangleF();
+            using (Font useFont = new Font("Gotham Medium", Convert.ToInt32(numericUpDown1.Value), FontStyle.Bold))
+            {
+                var height = ((int)e.Graphics.MeasureString(txtImageText.Text, useFont, imgView.Image.Width, StringFormat.GenericTypographic).Height);
+                header2Rect.Location = new Point(0, imgView.Image.Height - height);
+                var brush = new SolidBrush(Color.FromArgb(255, (byte)this.SelectedColor.R, (byte)this.SelectedColor.G, (byte)this.SelectedColor.B));
+                header2Rect.Size = new Size(imgView.Image.Width, ((int)e.Graphics.MeasureString(txtImageText.Text, useFont, imgView.Image.Width, StringFormat.GenericTypographic).Height));
+                e.Graphics.DrawString(txtImageText.Text, useFont, brush, header2Rect);
             }
 
-            //RectangleF descrRect = new RectangleF();
-            //using (Font useFont = new Font("Gotham Medium", 28, FontStyle.Italic))
-            //{
-            //    descrRect.Location = new Point(30, (int)header2Rect.Bottom);
-            //    descrRect.Size = new Size(600, ((int)e.Graphics.MeasureString(description, useFont, 600, StringFormat.GenericTypographic).Height));
-            //    e.Graphics.DrawString(description.ToLower(), useFont, SystemBrushes.WindowText, descrRect);
-            //}
-        }
-
-        private void imgView_Paint(object sender, PaintEventArgs e)
-        {
-
-            //using (Font myFont = new Font("Arial", 14))
-            //{
-            //    e.Graphics.DrawString("Hello .NET Guide!", myFont, Brushes.Green, new Point(2, 2));
-            //}
         }
 
         private void btnSelectColor_Click(object sender, EventArgs e)
@@ -165,7 +169,7 @@ namespace LassePhoto
             {
                 btnSelectColor.BackColor = colorDialog.Color;
                 this.SelectedColor = colorDialog.Color;
-
+                imgView.Refresh();
 
             }
         }
@@ -173,16 +177,60 @@ namespace LassePhoto
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             this.TextSize = (int)numericUpDown1.Value;
+            imgView.Refresh();
         }
 
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+
+            Bitmap bm = new Bitmap(imgView.Image);
+            var myImage = bm.Clone() as Image;
 
 
 
 
-   
 
 
- 
 
+
+            RectangleF header2Rect = new RectangleF();
+            Graphics Gra = System.Drawing.Graphics.FromImage(myImage);
+
+            using (Font useFont = new Font("Gotham Medium", Convert.ToInt32(numericUpDown1.Value), FontStyle.Bold))
+            {
+                var height = ((int)Gra.MeasureString(txtImageText.Text, useFont, imgView.Image.Width, StringFormat.GenericTypographic).Height);
+                header2Rect.Location = new Point(0, imgView.Image.Height - height);
+                header2Rect.Size = new Size(imgView.Image.Width, ((int)Gra.MeasureString(txtImageText.Text, useFont, imgView.Image.Width, StringFormat.GenericTypographic).Height));
+                var brush = new SolidBrush(Color.FromArgb(255, (byte)this.SelectedColor.R, (byte)this.SelectedColor.G, (byte)this.SelectedColor.B));
+
+                Gra.DrawString(txtImageText.Text, useFont, brush, header2Rect);
+            }
+
+            var frm = new frmPreview(myImage);
+
+
+
+
+            //
+
+
+
+            //     frm.Img = imgView.Image;
+
+            //RectangleF header2Rect = new RectangleF();
+
+            //using (Font useFont = new Font("Gotham Medium", Convert.ToInt32(numericUpDown1.Value), FontStyle.Bold))
+            //{
+            //    var height = ((int)Graphics.MeasureString(txtImageText.Text, useFont, imgView.Image.Width, StringFormat.GenericTypographic).Height);
+            //    header2Rect.Location = new Point(0, imgView.Image.Height - height);
+            //    header2Rect.Size = new Size(imgView.Image.Width, ((int)Graphics.MeasureString(txtImageText.Text, useFont, imgView.Image.Width, StringFormat.GenericTypographic).Height));
+            //    var brush = new SolidBrush(Color.FromArgb(255, (byte)this.SelectedColor.R, (byte)this.SelectedColor.G, (byte)this.SelectedColor.B));
+
+            //    Graphics.DrawString(txtImageText.Text, useFont, brush, header2Rect);
+            //}
+
+            frm.ShowDialog();
+
+        }
     }
 }

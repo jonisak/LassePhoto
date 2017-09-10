@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.imgView = new System.Windows.Forms.PictureBox();
             this.btnOpenImage = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.txtImageText = new System.Windows.Forms.TextBox();
@@ -38,24 +37,15 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.btnSelectColor = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.btnShow = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.imgView)).BeginInit();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.imgView = new System.Windows.Forms.PictureBox();
+            this.lblTextSize = new System.Windows.Forms.Label();
+            this.lblTextColor = new System.Windows.Forms.Label();
+            this.btnPreview = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // imgView
-            // 
-            this.imgView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.imgView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imgView.Location = new System.Drawing.Point(12, 96);
-            this.imgView.Name = "imgView";
-            this.imgView.Size = new System.Drawing.Size(1028, 513);
-            this.imgView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.imgView.TabIndex = 0;
-            this.imgView.TabStop = false;
-            this.imgView.Paint += new System.Windows.Forms.PaintEventHandler(this.imgView_Paint_1);
             // 
             // btnOpenImage
             // 
@@ -73,10 +63,10 @@
             this.txtImageText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtImageText.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtImageText.Location = new System.Drawing.Point(1056, 210);
+            this.txtImageText.Location = new System.Drawing.Point(1056, 139);
             this.txtImageText.Multiline = true;
             this.txtImageText.Name = "txtImageText";
-            this.txtImageText.Size = new System.Drawing.Size(231, 399);
+            this.txtImageText.Size = new System.Drawing.Size(231, 470);
             this.txtImageText.TabIndex = 2;
             this.txtImageText.TextChanged += new System.EventHandler(this.txtImageText_TextChanged);
             // 
@@ -86,7 +76,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblImageText.AutoSize = true;
             this.lblImageText.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblImageText.Location = new System.Drawing.Point(1053, 185);
+            this.lblImageText.Location = new System.Drawing.Point(1052, 114);
             this.lblImageText.Name = "lblImageText";
             this.lblImageText.Size = new System.Drawing.Size(46, 22);
             this.lblImageText.TabIndex = 3;
@@ -94,7 +84,6 @@
             // 
             // btnSaveImage
             // 
-            this.btnSaveImage.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnSaveImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveImage.Location = new System.Drawing.Point(297, 43);
             this.btnSaveImage.Name = "btnSaveImage";
@@ -110,7 +99,7 @@
             // 
             // btnSelectColor
             // 
-            this.btnSelectColor.Location = new System.Drawing.Point(1212, 96);
+            this.btnSelectColor.Location = new System.Drawing.Point(1222, 58);
             this.btnSelectColor.Name = "btnSelectColor";
             this.btnSelectColor.Size = new System.Drawing.Size(75, 23);
             this.btnSelectColor.TabIndex = 5;
@@ -120,23 +109,65 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(1056, 96);
+            this.numericUpDown1.Location = new System.Drawing.Point(955, 52);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 32);
             this.numericUpDown1.TabIndex = 6;
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
-            // btnShow
+            // panel1
             // 
-            this.btnShow.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShow.Location = new System.Drawing.Point(602, 43);
-            this.btnShow.Name = "btnShow";
-            this.btnShow.Size = new System.Drawing.Size(279, 47);
-            this.btnShow.TabIndex = 7;
-            this.btnShow.Text = "Spara bild";
-            this.btnShow.UseVisualStyleBackColor = true;
-            this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.imgView);
+            this.panel1.Location = new System.Drawing.Point(12, 114);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1021, 473);
+            this.panel1.TabIndex = 7;
+            // 
+            // imgView
+            // 
+            this.imgView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgView.Location = new System.Drawing.Point(23, 16);
+            this.imgView.Name = "imgView";
+            this.imgView.Size = new System.Drawing.Size(936, 418);
+            this.imgView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.imgView.TabIndex = 0;
+            this.imgView.TabStop = false;
+            this.imgView.Paint += new System.Windows.Forms.PaintEventHandler(this.imgView_Paint_1);
+            // 
+            // lblTextSize
+            // 
+            this.lblTextSize.AutoSize = true;
+            this.lblTextSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTextSize.Location = new System.Drawing.Point(801, 53);
+            this.lblTextSize.Name = "lblTextSize";
+            this.lblTextSize.Size = new System.Drawing.Size(148, 31);
+            this.lblTextSize.TabIndex = 8;
+            this.lblTextSize.Text = "Textstorlek";
+            // 
+            // lblTextColor
+            // 
+            this.lblTextColor.AutoSize = true;
+            this.lblTextColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTextColor.Location = new System.Drawing.Point(1077, 51);
+            this.lblTextColor.Name = "lblTextColor";
+            this.lblTextColor.Size = new System.Drawing.Size(114, 31);
+            this.lblTextColor.TabIndex = 9;
+            this.lblTextColor.Text = "Textfärg";
+            // 
+            // btnPreview
+            // 
+            this.btnPreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPreview.Location = new System.Drawing.Point(590, 43);
+            this.btnPreview.Name = "btnPreview";
+            this.btnPreview.Size = new System.Drawing.Size(203, 47);
+            this.btnPreview.TabIndex = 10;
+            this.btnPreview.Text = "Förhandsgranska";
+            this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // Form1
             // 
@@ -144,26 +175,28 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1299, 621);
-            this.Controls.Add(this.btnShow);
+            this.Controls.Add(this.btnPreview);
+            this.Controls.Add(this.lblTextColor);
+            this.Controls.Add(this.lblTextSize);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.btnSelectColor);
             this.Controls.Add(this.btnSaveImage);
             this.Controls.Add(this.lblImageText);
             this.Controls.Add(this.txtImageText);
             this.Controls.Add(this.btnOpenImage);
-            this.Controls.Add(this.imgView);
             this.Name = "Form1";
             this.Text = "Lasse Photo";
-            ((System.ComponentModel.ISupportInitialize)(this.imgView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox imgView;
         private System.Windows.Forms.Button btnOpenImage;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.TextBox txtImageText;
@@ -173,7 +206,11 @@
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.Button btnSelectColor;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button btnShow;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox imgView;
+        private System.Windows.Forms.Label lblTextSize;
+        private System.Windows.Forms.Label lblTextColor;
+        private System.Windows.Forms.Button btnPreview;
     }
 }
 
