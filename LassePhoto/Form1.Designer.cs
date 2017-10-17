@@ -58,6 +58,10 @@
             this.btnOpenImage.UseVisualStyleBackColor = true;
             this.btnOpenImage.Click += new System.EventHandler(this.btnOpenImage_Click);
             // 
+            // openFileDialog
+            // 
+            this.openFileDialog.RestoreDirectory = true;
+            // 
             // txtImageText
             // 
             this.txtImageText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -92,6 +96,10 @@
             this.btnSaveImage.Text = "Spara bild";
             this.btnSaveImage.UseVisualStyleBackColor = true;
             this.btnSaveImage.Click += new System.EventHandler(this.btnSaveImage_Click);
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.RestoreDirectory = true;
             // 
             // colorDialog
             // 

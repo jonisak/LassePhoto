@@ -18,49 +18,33 @@ namespace LassePhoto
         Graphics Graphics;
         Color SelectedColor;
         int TextSize;
-
-        //int imageWidth;
-        //int imageHeight;
-
-        //int pictureBoxWidth;
-        //int pictureBoxHeight;
-
-
-
-        //int textboxHeight;
-        //int textboxWidth;
-        //int textboxX;
-        //int textboxY;
+        string m_initialOpenFileDir = "";
+        string m_initialSaveFileDir = "";
 
         public Form1()
         {
             InitializeComponent();
-
-
             this.TextSize = 20;
-            //this.textboxX = 0;
-            //this.textboxY = 100;
-            //this.textboxHeight = 500;
-            //this.textboxWidth = 500;
             numericUpDown1.Value = 20;
-
             SelectedColor = Color.Black;
             btnSelectColor.BackColor = SelectedColor;
-
-
 
         }
 
 
 
 
-        //private bool IsSelecting = false;
-        //// The area we are selecting.
-        //private int X0, Y0, X1, Y1;
-
         private void btnOpenImage_Click(object sender, EventArgs e)
         {
+
             openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+
+            if (m_initialOpenFileDir.Length > 0)
+            {
+                openFileDialog.InitialDirectory = m_initialOpenFileDir;
+            }
+
+
 
             int size = -1;
             DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
@@ -69,23 +53,15 @@ namespace LassePhoto
                 string file = openFileDialog.FileName;
                 try
                 {
-
-
                     SelectedImage = new Bitmap(file);
-                    //imgView.Image = (Bitmap)SelectedImage.Clone();
                     imgView.Image = (Bitmap)SelectedImage;
+                    txtImageText.Text = Path.GetFileNameWithoutExtension(file);
 
 
-                    // var point = TranslateZoomMousePosition(new Point(0, 100));
-                    //this.textboxX = 0;
-                    //this.textboxY = 100;
+
+                    m_initialOpenFileDir = Path.GetDirectoryName(file);
 
 
-                    //this.imageWidth = imgView.Image.Width;
-                    //this.imageHeight = imgView.Image.Height;
-
-                    //this.pictureBoxWidth = imgView.Width;
-                    //this.pictureBoxHeight = imgView.Height;
                 }
                 catch (Exception ex)
                 {
@@ -105,6 +81,15 @@ namespace LassePhoto
         private void btnSaveImage_Click(object sender, EventArgs e)
         {
             saveFileDialog.Filter = "Jpg Image|*.jpg";
+
+            //saveFileDialog.FileName = openFileDialog.FileName;
+            if (m_initialSaveFileDir.Length > 0)
+            {
+                saveFileDialog.InitialDirectory = m_initialSaveFileDir;
+            }
+            saveFileDialog.FileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName) + "_kommentar" + Path.GetExtension(openFileDialog.FileName);
+
+
 
             DialogResult result = saveFileDialog.ShowDialog();
             if (result == DialogResult.OK) // Test result.
@@ -130,6 +115,13 @@ namespace LassePhoto
 
                     Bitmap bm = new Bitmap(imgView.Image);
                     bm.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+
+
+                    m_initialSaveFileDir = Path.GetDirectoryName(file);
+
+                    MessageBox.Show("Bild sparad!");
+
 
                     imgView.Image = null;
                     Graphics = null;
@@ -188,11 +180,6 @@ namespace LassePhoto
 
 
 
-
-
-
-
-
             RectangleF header2Rect = new RectangleF();
             Graphics Gra = System.Drawing.Graphics.FromImage(myImage);
 
@@ -207,27 +194,6 @@ namespace LassePhoto
             }
 
             var frm = new frmPreview(myImage);
-
-
-
-
-            //
-
-
-
-            //     frm.Img = imgView.Image;
-
-            //RectangleF header2Rect = new RectangleF();
-
-            //using (Font useFont = new Font("Gotham Medium", Convert.ToInt32(numericUpDown1.Value), FontStyle.Bold))
-            //{
-            //    var height = ((int)Graphics.MeasureString(txtImageText.Text, useFont, imgView.Image.Width, StringFormat.GenericTypographic).Height);
-            //    header2Rect.Location = new Point(0, imgView.Image.Height - height);
-            //    header2Rect.Size = new Size(imgView.Image.Width, ((int)Graphics.MeasureString(txtImageText.Text, useFont, imgView.Image.Width, StringFormat.GenericTypographic).Height));
-            //    var brush = new SolidBrush(Color.FromArgb(255, (byte)this.SelectedColor.R, (byte)this.SelectedColor.G, (byte)this.SelectedColor.B));
-
-            //    Graphics.DrawString(txtImageText.Text, useFont, brush, header2Rect);
-            //}
 
             frm.ShowDialog();
 

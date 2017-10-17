@@ -51,7 +51,7 @@
             this.ClientSize = new System.Drawing.Size(1021, 607);
             this.Controls.Add(this.imgView);
             this.Name = "frmPreview";
-            this.Text = "frmPreview";
+            this.Text = "Förhandsgranska";
             ((System.ComponentModel.ISupportInitialize)(this.imgView)).EndInit();
             this.ResumeLayout(false);
 
