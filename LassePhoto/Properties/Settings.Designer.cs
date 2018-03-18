@@ -22,5 +22,29 @@ namespace LassePhoto.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string OpenFileDialoge {
+            get {
+                return ((string)(this["OpenFileDialoge"]));
+            }
+            set {
+                this["OpenFileDialoge"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SaveFileDialoge {
+            get {
+                return ((string)(this["SaveFileDialoge"]));
+            }
+            set {
+                this["SaveFileDialoge"] = value;
+            }
+        }
     }
 }

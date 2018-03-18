@@ -42,6 +42,7 @@
             this.lblTextSize = new System.Windows.Forms.Label();
             this.lblTextColor = new System.Windows.Forms.Label();
             this.btnPreview = new System.Windows.Forms.Button();
+            this.btnRotateImage = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgView)).BeginInit();
@@ -50,7 +51,7 @@
             // btnOpenImage
             // 
             this.btnOpenImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenImage.Location = new System.Drawing.Point(12, 43);
+            this.btnOpenImage.Location = new System.Drawing.Point(12, 12);
             this.btnOpenImage.Name = "btnOpenImage";
             this.btnOpenImage.Size = new System.Drawing.Size(279, 47);
             this.btnOpenImage.TabIndex = 1;
@@ -67,10 +68,10 @@
             this.txtImageText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtImageText.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtImageText.Location = new System.Drawing.Point(1056, 139);
+            this.txtImageText.Location = new System.Drawing.Point(796, 139);
             this.txtImageText.Multiline = true;
             this.txtImageText.Name = "txtImageText";
-            this.txtImageText.Size = new System.Drawing.Size(231, 470);
+            this.txtImageText.Size = new System.Drawing.Size(200, 578);
             this.txtImageText.TabIndex = 2;
             this.txtImageText.TextChanged += new System.EventHandler(this.txtImageText_TextChanged);
             // 
@@ -80,7 +81,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblImageText.AutoSize = true;
             this.lblImageText.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblImageText.Location = new System.Drawing.Point(1052, 114);
+            this.lblImageText.Location = new System.Drawing.Point(950, 102);
             this.lblImageText.Name = "lblImageText";
             this.lblImageText.Size = new System.Drawing.Size(46, 22);
             this.lblImageText.TabIndex = 3;
@@ -89,7 +90,7 @@
             // btnSaveImage
             // 
             this.btnSaveImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveImage.Location = new System.Drawing.Point(297, 43);
+            this.btnSaveImage.Location = new System.Drawing.Point(297, 12);
             this.btnSaveImage.Name = "btnSaveImage";
             this.btnSaveImage.Size = new System.Drawing.Size(279, 47);
             this.btnSaveImage.TabIndex = 4;
@@ -107,7 +108,7 @@
             // 
             // btnSelectColor
             // 
-            this.btnSelectColor.Location = new System.Drawing.Point(1222, 58);
+            this.btnSelectColor.Location = new System.Drawing.Point(437, 69);
             this.btnSelectColor.Name = "btnSelectColor";
             this.btnSelectColor.Size = new System.Drawing.Size(75, 23);
             this.btnSelectColor.TabIndex = 5;
@@ -117,7 +118,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(955, 52);
+            this.numericUpDown1.Location = new System.Drawing.Point(166, 61);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 32);
             this.numericUpDown1.TabIndex = 6;
@@ -132,7 +133,7 @@
             this.panel1.Controls.Add(this.imgView);
             this.panel1.Location = new System.Drawing.Point(12, 114);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1021, 473);
+            this.panel1.Size = new System.Drawing.Size(773, 603);
             this.panel1.TabIndex = 7;
             // 
             // imgView
@@ -140,7 +141,7 @@
             this.imgView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.imgView.Location = new System.Drawing.Point(23, 16);
             this.imgView.Name = "imgView";
-            this.imgView.Size = new System.Drawing.Size(936, 418);
+            this.imgView.Size = new System.Drawing.Size(736, 518);
             this.imgView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.imgView.TabIndex = 0;
             this.imgView.TabStop = false;
@@ -150,7 +151,7 @@
             // 
             this.lblTextSize.AutoSize = true;
             this.lblTextSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTextSize.Location = new System.Drawing.Point(801, 53);
+            this.lblTextSize.Location = new System.Drawing.Point(12, 62);
             this.lblTextSize.Name = "lblTextSize";
             this.lblTextSize.Size = new System.Drawing.Size(148, 31);
             this.lblTextSize.TabIndex = 8;
@@ -160,7 +161,7 @@
             // 
             this.lblTextColor.AutoSize = true;
             this.lblTextColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTextColor.Location = new System.Drawing.Point(1077, 51);
+            this.lblTextColor.Location = new System.Drawing.Point(292, 62);
             this.lblTextColor.Name = "lblTextColor";
             this.lblTextColor.Size = new System.Drawing.Size(114, 31);
             this.lblTextColor.TabIndex = 9;
@@ -169,7 +170,7 @@
             // btnPreview
             // 
             this.btnPreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPreview.Location = new System.Drawing.Point(590, 43);
+            this.btnPreview.Location = new System.Drawing.Point(582, 12);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(203, 47);
             this.btnPreview.TabIndex = 10;
@@ -177,12 +178,24 @@
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
+            // btnRotateImage
+            // 
+            this.btnRotateImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRotateImage.Location = new System.Drawing.Point(582, 65);
+            this.btnRotateImage.Name = "btnRotateImage";
+            this.btnRotateImage.Size = new System.Drawing.Size(203, 40);
+            this.btnRotateImage.TabIndex = 11;
+            this.btnRotateImage.Text = "Rotera bild";
+            this.btnRotateImage.UseVisualStyleBackColor = true;
+            this.btnRotateImage.Click += new System.EventHandler(this.btnRotateImage_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1299, 621);
+            this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.btnRotateImage);
             this.Controls.Add(this.btnPreview);
             this.Controls.Add(this.lblTextColor);
             this.Controls.Add(this.lblTextSize);
@@ -219,6 +232,7 @@
         private System.Windows.Forms.Label lblTextSize;
         private System.Windows.Forms.Label lblTextColor;
         private System.Windows.Forms.Button btnPreview;
+        private System.Windows.Forms.Button btnRotateImage;
     }
 }
 

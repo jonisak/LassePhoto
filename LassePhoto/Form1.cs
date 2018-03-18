@@ -1,8 +1,10 @@
-﻿using System;
+﻿using LassePhoto.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,8 +20,6 @@ namespace LassePhoto
         Graphics Graphics;
         Color SelectedColor;
         int TextSize;
-        string m_initialOpenFileDir = "";
-        string m_initialSaveFileDir = "";
 
         public Form1()
         {
@@ -28,6 +28,25 @@ namespace LassePhoto
             numericUpDown1.Value = 20;
             SelectedColor = Color.Black;
             btnSelectColor.BackColor = SelectedColor;
+
+
+
+            //Panel MyPanel = new Panel();
+            //PictureBox pictureBox1 = new PictureBox();
+
+            //Image image = Image.FromFile("image.png");
+
+            ////pictureBox1.Image = image;
+            ////pictureBox1.Height = image.Height;
+            //pictureBox1.Width = image.Width;
+
+            //MyPanel.Controls.Add(pictureBox1);
+            //MyPanel.AutoScroll = true;
+            //this.Controls.Add(MyPanel);
+            panel1.AutoScroll = true;
+            this.imgView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+
+
 
         }
 
@@ -39,10 +58,11 @@ namespace LassePhoto
 
             openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
 
-            if (m_initialOpenFileDir.Length > 0)
+            if (Settings.Default.OpenFileDialoge != null && Settings.Default.OpenFileDialoge.Length > 0)
             {
-                openFileDialog.InitialDirectory = m_initialOpenFileDir;
+                openFileDialog.InitialDirectory = Settings.Default.OpenFileDialoge;
             }
+          
 
 
 
@@ -59,8 +79,8 @@ namespace LassePhoto
 
 
 
-                    m_initialOpenFileDir = Path.GetDirectoryName(file);
-
+                    Settings.Default.OpenFileDialoge = Path.GetDirectoryName(file);
+                    Settings.Default.Save();
 
                 }
                 catch (Exception ex)
@@ -83,9 +103,9 @@ namespace LassePhoto
             saveFileDialog.Filter = "Jpg Image|*.jpg";
 
             //saveFileDialog.FileName = openFileDialog.FileName;
-            if (m_initialSaveFileDir.Length > 0)
+            if (Settings.Default.SaveFileDialoge != null && Settings.Default.SaveFileDialoge.Length > 0)
             {
-                saveFileDialog.InitialDirectory = m_initialSaveFileDir;
+                saveFileDialog.InitialDirectory = Settings.Default.SaveFileDialoge;
             }
             saveFileDialog.FileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName) + "_kommentar" + Path.GetExtension(openFileDialog.FileName);
 
@@ -118,7 +138,8 @@ namespace LassePhoto
 
 
 
-                    m_initialSaveFileDir = Path.GetDirectoryName(file);
+                    Settings.Default.SaveFileDialoge = Path.GetDirectoryName(file);
+                    Settings.Default.Save();
 
                     MessageBox.Show("Bild sparad!");
 
@@ -198,5 +219,69 @@ namespace LassePhoto
             frm.ShowDialog();
 
         }
+
+
+        private void btnRotateImage_Click(object sender, EventArgs e)
+        {
+
+            Size size = imgView.Size;
+
+
+            //Bitmap bm = new Bitmap(imgView.Image);
+            //imgView.Image = RotateImage(bm, 90);
+            imgView.Image.RotateFlip(RotateFlipType.Rotate90FlipXY);
+            //imgView.Height = imgView.Image.Height;
+            //imgView.Width = imgView.Image.Width;
+
+
+            //Size size2 = new Size(size.Height, size.Width);
+            //imgView.Size = size2;
+            imgView.Invalidate();
+
+            imgView.Update();
+            panel1.Refresh();
+            imgView.Refresh();
+        }
+
+
+        ///// <summary>
+        ///// method to rotate an image either clockwise or counter-clockwise
+        ///// </summary>
+        ///// <param name="img">the image to be rotated</param>
+        ///// <param name="rotationAngle">the angle (in degrees).
+        ///// NOTE: 
+        ///// Positive values will rotate clockwise
+        ///// negative values will rotate counter-clockwise
+        ///// </param>
+        ///// <returns></returns>
+        //public static Image RotateImage(Image img, float rotationAngle)
+        //{
+        //    //create an empty Bitmap image
+        //    Bitmap bmp = new Bitmap(img.Width, img.Height);
+
+        //    //turn the Bitmap into a Graphics object
+        //    Graphics gfx = Graphics.FromImage(bmp);
+
+        //    //now we set the rotation point to the center of our image
+        //    gfx.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);
+
+        //    //now rotate the image
+        //    gfx.RotateTransform(rotationAngle);
+
+        //    gfx.TranslateTransform(-(float)bmp.Width / 2, -(float)bmp.Height / 2);
+
+        //    //set the InterpolationMode to HighQualityBicubic so to ensure a high
+        //    //quality image once it is transformed to the specified size
+        //    gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+        //    //now draw our new image onto the graphics object
+        //    gfx.DrawImage(img, new Point(0, 0));
+
+        //    //dispose of our Graphics object
+        //    gfx.Dispose();
+
+        //    //return the image
+        //    return bmp;
+        //}
     }
 }
